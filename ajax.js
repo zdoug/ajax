@@ -5,28 +5,24 @@ window.addEventListener("load", () => {
     
     form.addEventListener("submit", (event) => {
         event.preventDefault();
-        let formValues = {
-            "nome": form.nome.value,
-            "email": form.email.value
-        };
+        let formValues = new FormData(form);
         callAjax(formValues);    
     });
     
     let callAjax = (data) => {
         let ajaxObject = new XMLHttpRequest();
         ajaxObject.open("POST", "submit.php");
-        ajaxObject.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         ajaxObject.onreadystatechange = function() {
             if(ajaxObject.readyState==4) {
                 if(ajaxObject.status==200) {
                     result.classList.add("open");
-                    result.innerHTML = "Deu certo: " + data.nome + " " + data.email + ".";
+                    result.innerHTML = "Deu certo: " + data.get("nome") + " " + data.get("email") + ".";
                     setTimeout(() => {
                         result.classList.remove("open");
                     },3000);
                 }
             }
         }
-        ajaxObject.send("nome=" + data.nome + "&email=" + data.email);
+        ajaxObject.send(data);
     } 
 });
