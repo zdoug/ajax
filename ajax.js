@@ -1,10 +1,13 @@
 window.addEventListener("load", () => {
     let form = document.querySelector("#form");
     let result = document.querySelector("p#result");
+    // https://javascript.info/xmlhttprequest
     
     
     form.addEventListener("submit", (event) => {
         event.preventDefault();
+
+        // https://developer.mozilla.org/en-US/docs/Web/API/FormData
         let formValues = new FormData(form);
         callAjax(formValues);    
     });
