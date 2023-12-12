@@ -15,14 +15,14 @@ window.addEventListener("load", () => {
     let callAjax = (data) => {
         let ajaxObject = new XMLHttpRequest();
         ajaxObject.open("POST", "submit.php");
-        ajaxObject.onreadystatechange = function() {
-            if(ajaxObject.readyState==4) {
-                if(ajaxObject.status==200) {
+        ajaxObject.onreadystatechange = () => {
+            if(ajaxObject.readyState == 4) {
+                if(ajaxObject.status == 200) {
                     result.classList.add("open");
                     result.innerHTML = "Deu certo: " + data.get("nome") + " " + data.get("email") + ".";
                     setTimeout(() => {
                         result.classList.remove("open");
-                    },3000);
+                    }, 3000);
                 }
             }
         }
